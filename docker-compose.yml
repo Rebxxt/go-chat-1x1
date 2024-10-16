@@ -1,0 +1,19 @@
+version: "3.1"
+services:
+  chat-db:
+    image: postgres
+    hostname: chat-db
+    container_name: chat-db
+    user: postgres
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "9980:5432"
+    healthcheck:
+      test: "pg_isready -h localhost"
+      interval: 1s
+      timeout: 60s
+      retries: 30
